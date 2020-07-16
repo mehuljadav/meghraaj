@@ -95,10 +95,13 @@ target_group_entity = InputPeerChannel(target_group.id,target_group.access_hash)
  
 print(gr+"[1] add member by user ID\n[2] add member by username ")
 mode = int(input(gr+"Input : "+re)) 
-
+n = 0
  
 for user in users:
-    	    try:
+    	   n += 1
+    	if n % 50 == 0:
+	    time.sleep(1)
+		try:
 	        print ("Adding {}".format(user['id']))
 	        if mode == 1:
 	            if user['username'] == "":
@@ -110,7 +113,7 @@ for user in users:
 	            sys.exit(re+"[!] Invalid Mode Selected. Please Try Again.")
 	        client(InviteToChannelRequest(target_group_entity,[user_to_add]))
 	        print(gr+"[+] Waiting for 20-30 Seconds...")
-	        time.sleep(random.randrange(1, 5))
+	        time.sleep(random.randrange(1, 3))
 	    except PeerFloodError:
 	        print(re+"[!] Getting Flood Error from telegram. \n[!] Script is stopping now. \n[!] Please try again after some time.")
 	    except UserPrivacyRestrictedError:
